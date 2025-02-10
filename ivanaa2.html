@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .botun{
+            
+            }
+        
+    </style>
+</head>
+<body>
+    <h1>Zbrajanje</h1>
+    <p>Unesite prvi broj: <input id="prvibr"> </input></p>
+    <p>Unesite drugi broj: <input id="drugibr"> </input></p>
+    <div class="div"><button class="botun" onclick="zbroji()">Zbroji</button></div>
+    <p id="rezultat">Rezultat je: </p>
+
+    <p>Unesite vaše godine: <input id="godine"> </input></p>
+    <button class="botun2" onclick="provjera()">isAdult</button>
+    <p id="jesili"> </p>
+    <p id="br"></p>
+
+
+    <script>
+        function zbroji(){
+            var a = parseInt(document.getElementById("prvibr").value);
+            var b = parseInt(document.getElementById("drugibr").value);
+            var zbroj = a + b;
+            document.getElementById("rezultat").innerHTML="Rezultat je:"+zbroj;
+        }
+
+        function provjera(){
+            var god=  parseInt(document.getElementById("godine").value);
+            if ( god < 18 ){
+                document.getElementById("jesili").innerHTML="Nisi punoljentan";
+            }
+            else{
+            document.getElementById("jesili").innerHTML="Punoljetan si";
+        }
+        var i=" ";
+        while(god!=0){
+            i=i+god+", ";
+            god=god-1;
+        }
+        document.getElementById("br").innerHTML=i;
+        }
+        
+    </script>
+</body>
+</html>
