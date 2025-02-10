@@ -11,7 +11,11 @@ print("opseg je:")
 print(o)
 '''
 #2.
+<<<<<<< HEAD
 a = int(input("unesi dunja: "))
+=======
+a = int(input("unesi nikolina "))
+>>>>>>> 167c93268eef985524271a123fb7984a08f5483c
 b = int(input("unesi b: "))
 
 if b == 0:
