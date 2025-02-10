@@ -11,7 +11,7 @@ print("opseg je:")
 print(o)
 '''
 #2.
-a = int(input("unesi a: "))
+a = int(input("unesi dunja: "))
 b = int(input("unesi b: "))
 
 if b == 0:
