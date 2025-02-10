@@ -134,8 +134,16 @@
   }
 
     for($i = 0; $i < 10; $i++){
-        echo "<br>";
+        echo "<br><br>";
+        echo $i +$i;
         echo $i;
+        echo "asfhasfghk";
+        echo "asfhasfghk";
+    }
+    for($i = 0; $i < 10; $i++){
+      
+        echo "asfhasfghk";
+        echo "asfhasfghk";
     }
         
    ?>
