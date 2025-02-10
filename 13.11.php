@@ -22,7 +22,11 @@
 
 
                <label>Unesite  niz :</label><br>
+<<<<<<< HEAD
             <input type = "text" name ="zhshwkhss"><br>
+=======
+            <input type = "text" name ="asasaqwrwqrqdasdsd"><br>
+>>>>>>> 26ef943118833ce0af0b8c580afea64d4841e4fe
 
            <input type="submit" name="registracija" value="Submit" >
            
