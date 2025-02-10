@@ -22,7 +22,7 @@
 
 
                <label>Unesite  niz :</label><br>
-            <input type = "text" name ="niz"><br>
+            <input type = "text" name ="asasaqwrwqrqdasdsd"><br>
 
            <input type="submit" name="registracija" value="Submit" >
            
