@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style>
+        div{
+            width: 300px;
+        }
+        #bar{
+            height: 10px;
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Prodajem bubrege</h1>
+    <form>
+        <div id="imel">
+            <label>ime</label>
+            <input name="ime" id="ime" type="text">
+        </div>
+        <div id="prezimel">
+            <label>prezime</label>
+            <input name="prezime" id="prezime" type="text">
+        </div>
+        <div id="maill">
+            <label>mail</label>
+            <input name="mail" id="mail" type="email">
+        </div>
+        <div id="sifral">
+            <label>šifra</label>
+            <input name="sifra" id="sifra" type="password">
+            <div id="bar"></div>
+            <p id="nevazecaSifra1">Šifra mora imati 8 znakova</p>
+            <p id="nevazecaSifra2">Šifra mora imati broj</p>
+            <p id="nevazecaSifra3">Šifra mora imati poseban znak</p>
+            
+        </div>
+        <label>Prihvačate li uvjete usluge?</label><input onclick="popravi()" id="check" type="checkbox"><p id="upozorenje" style="display: none; color: red;">Motas pristati</p>
+    </form><button onclick="submit()">submit</button>
+
+
+
+
+
+    <script>
+        $('#nevazecaSifra1').hide()
+        $('#nevazecaSifra2').hide()
+        $('#nevazecaSifra3').hide()
+
+        function submit() {
+            let ime = $('#ime').val()
+            let prezime = $('#prezime').val()
+            let mail = $('#mail').val()
+            let sifra = $('#sifra').val()
+            let check = $('#check').is(":checked")
+            let dulj = sifra.length
+            let broj = true
+            let znak = true
+            for (let i = 0; i < dulj; i++) {
+                if ((sifra[i]== "0") || (sifra[i]== "1") || (sifra[i]== "2") || (sifra[i]== "3") || (sifra[i]== "4") || (sifra[i]== "5") || (sifra[i]== "6") || (sifra[i]== "7") || (sifra[i]== "8") || (sifra[i]== "9")) {
+                    broj = false
+                }
+            }
+            for (let i = 0; i < dulj; i++) {
+                if ((sifra[i]== ".") || (sifra[i]== ",") || (sifra[i]== "!") || (sifra[i]== "?")) {
+                    znak = false
+                }
+            }
+            
+            if (ime == '') {
+                $('#imel').css('border','red solid 1px')
+                $('#imel').append('polje mora biti ispunjeno').css('color','red')
+            }
+            if (prezime == '') {
+                $('#prezimel').css('border','red solid 1px')
+                $('#prezimel').append('polje mora biti ispunjeno').css('color','red')
+            }
+            if (mail == '') {
+                $('#maill').css('border','red solid 1px')
+                $('#maill').append('polje mora biti ispunjeno').css('color','red')
+            }
+            if (sifra == '') {
+                $('#sifral').css('border','red solid 1px')
+                $('#sifral').append('polje mora biti ispunjeno').css('color','red')
+            }
+            if (!check) {
+                $('#upozorenje').css('display','block')
+            }
+            else{
+                $('#upozorenje').css('display','none')
+            }
+            if (dulj < 8) {
+                $('#nevazecaSifra1').show()
+            }
+            else{
+                $('#nevazecaSifra1').hide()
+            }
+            if (broj) {
+                $('#nevazecaSifra2').show()
+            }
+            else{
+                $('#nevazecaSifra2').hide()
+            }
+            if (znak) {
+                $('#nevazecaSifra3').show()
+            }
+            else{
+                $('#nevazecaSifra3').hide()
+            }
+        }
+        function popravi() {
+            $('#upozorenje').css('display','none')
+        }
+        let vrijednost = $('#sifra').val()
+        let dulj2 = vrijednost.length
+        let broj2 = false
+        let znak2 = false
+        let skup = ["nije", "nije","nije"]
+        let tocnost = 0
+        $('#sifra').on({
+            keydown:function(){
+                vrijednost = $('#sifra').val()
+                dulj2 = vrijednost.length
+                broj2 = false
+                znak2 = false
+                tocnost = 0
+                if (dulj2 < 8) {
+                    skup[0] = "nije"
+                }
+                else{
+                    skup[0] = "je"
+                }
+                for (let i = 0; i < dulj2; i++) {
+                    console.log("xdvy")
+                if ((vrijednost[i]== "0") || (sifra[i]== "1") || (sifra[i]== "2") || (sifra[i]== "3") || (sifra[i]== "4") || (sifra[i]== "5") || (sifra[i]== "6") || (sifra[i]== "7") || (sifra[i]== "8") || (sifra[i]== "9")) {
+                    broj2 = true
+                    console.log("ubhnji")
+                }
+            }
+            for (let i = 0; i < dulj2; i++) {
+                if ((vrijednost[i]== ".") || (sifra[i]== ",") || (sifra[i]== "!") || (sifra[i]== "?")) {
+                    znak2 = true
+                    console.log("ubhnji")
+                }
+                
+            }
+
+                if (dulj2 < 8) {
+                    skup[0] = "nije"
+                }
+                else{
+                    skup[0] = "je"
+                }
+                if (broj2) {
+                    skup[1] = "je"
+                }
+                else{
+                    skup[1] = "nije"
+                }
+                if (znak2) {
+                    skup[2] = "je"
+                }
+                else{
+                    skup[2] = "nije"
+                }
+            for (let i = 0; i < 3; i++) {
+                if (skup[i] == "je") {
+                    tocnost++
+                    console.log("bijnkm")
+                }
+            }
+            console.log(skup)
+            if (tocnost == 0) {
+                $('#bar').css('width','50px')
+                $('#bar').css('backgroung-collor','gray')
+            }
+            else if (tocnost == 1) {
+                $('#bar').css('width','100px')
+                $('#bar').css('backgroung-collor','red')
+            }
+            }
+        })
+
+    </script>
+</body>
+</html>
