@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-Vito je tata
-=======
 NIkolina je profa
->>>>>>> a0916224dc82f35a7c7fe33dbbb055aa6ecbde4e

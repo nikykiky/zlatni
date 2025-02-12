@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        .izgled{
+        .izgled {
             height: 200px;
             width: 200px;
         }
     </style>
 </head>
+
 <body>
-    <div id="container">Vito pusha</div>
+    <div id="container">nikolinannanan</div>
 
     <script>
         class blok {
@@ -24,7 +26,7 @@
                 document.getElementById('container').appendChild(a);
                 a.addEventListener('click', this.promjena)
             }
-            promjena(e){
+            promjena(e) {
                 console.log(e)
                 e.target.style.backgroundColor = 'pink'
             }
@@ -32,7 +34,8 @@
         let blok1 = new blok('red');
         let blok2 = new blok('blue');
         let blok3 = new blok('yellow');
-        
+
     </script>
 </body>
+
 </html>
