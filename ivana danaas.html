@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        *, *:before, *:after {
+          box-sizing: border-box;
+        }
+        
+        body {
+          font-family: "Montserrat", sans-serif;
+          color: #888;
+        }
+        
+        h1 {
+          font-weight: 300;
+        }
+        
+        .text-red {
+          color: #f07464;
+        }
+        
+        .button-toggle-wrap {
+          text-align: center;
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+        }
+        
+        .button-toggle {
+          display: inline-block;
+          background: #bbbbbb;
+          border-radius: 3px;
+          height: 48px;
+          padding: 4px;
+          width: 101px;
+          position: relative;
+          box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.22);
+        }
+        .button-toggle .handle {
+          position: absolute;
+          left: 4px;
+          right: auto;
+          width: 40px;
+          height: 40px;
+          background: #fff;
+          border-radius: 3px;
+          transition: all 0.4s cubic-bezier(0.33, 1.6, 0.66, 1);
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.22);
+        }
+        
+        .toggler {
+          display: none;
+        }
+        .toggler:checked + .button-toggle {
+          background: #f07464;
+        }
+        .toggler:checked + .button-toggle .handle {
+          left: 57px;
+        }
+        </style>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+    
+    <p>jQuery <span class="blink">Excercises</span> and solution</p>
+
+    <label class="button-toggle-wrap">
+        <h1 class="my-text">My life is beautiful, because...</h1>
+        <input class="toggler" type="checkbox" data-toggle="button-toggle"/>
+        <div class="button-toggle">
+          <div class="handle">
+            <div class="bars"></div>
+          </div>
+        </div>
+      </label>
+
+    <script>
+
+        $(document).ready(function(){
+            function blink_test(){
+                $(".blink").fadeOut(500);
+                $(".blink").fadeIn(500);
+            }
+            function gasi(){
+                clearInterval(a);
+            }
+            var a= setInterval(blink_test,1000);
+            setTimeout(gasi,6000);
+        });
+
+        $(function(){
+            $("[data-toggle]").click(function(){
+                var target=$(".my-text");
+                if($(this).prop("checked")){
+                    target.html('You are my life<span class="text-red"><3</span>');
+                } else{
+                    target.html('My life is beautiful, because...');
+                }
+            })
+        })
+    </script>
+
+</body>
+</html>
