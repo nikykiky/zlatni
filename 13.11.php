@@ -41,7 +41,16 @@
     if (isset($_POST['registracija'])) {
         // $niz1 = $_POST['niz1'];
         // $niz2 = $_POST['niz2'];
+        for ($i = count($nizkopija) - 1; $i >= 0; $i--) {  
+            $nizkopijaObrnuto[] = $nizkopija[$i];
+        }
 
+        echo implode(", ", $nizkopijaObrnuto);
+
+        for($i = 0; $i < 10; $i++){
+            echo $i +$i;
+            
+        }
         // $zbrojniz = [];
 
         // $nizkopija1=[];
