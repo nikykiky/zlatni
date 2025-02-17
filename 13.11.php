@@ -65,58 +65,7 @@
         // echo implode(", ", $zbrojniz);
 
 
-        // $engRijec = $_POST['engRijec'];
-
-        // $dictionary = [
-        //     'hello' => 'bok',
-        //     'goodbye' => 'doviđenja',
-        //     'please' => 'molim',
-        //     'thank you' => 'hvala'
-        // ];
-        // foreach ($dictionary as $engleski => $hrvatski){
-        //     if($engleski == $engRijec){
-        //         echo $engRijec. " je " . $hrvatski;
-        //     }
-        // }
-
-        // $broj = $_POST['broj'];
-        // $faktorjela = 1;
-
-        // for($i = 1; $i <= $broj; $i++){
-        //     $faktorjela *= $i;
-        // }
-        // echo "Faktorjela broja " .$broj. " je ".$faktorjela;
-
-        // $broj = $_POST['broj']; 
-        // $Prost = true;
-
-        // if ($broj % 2 == 0) {
-        //     echo $broj . " je paran. ";
-        // } else {
-        //     echo $broj . " je neparan. ";
-        // }
-
-        // if ($broj <= 1) {
-        //     $Prost = false; 
-        // } else {
-        //     for ($i = 2; $i <= sqrt($broj); $i++) {
-        //         if ($broj % $i == 0) {
-        //             $Prost = false; 
-        //             break;
-        //         }
-        //     }
-        // }
-
-        // if ($Prost) {
-        //     echo "$broj je prost.";
-        // } else {
-        //     echo "$broj nije prost.";
-        // }
-
-        $niz = $_POST['niz'];
-        $nizkopija = [];
-        $nizkopija = explode(",", $niz);
-        $nizkopijaObrnuto = [];
+       
         
         for ($i = count($nizkopija) - 1; $i >= 0; $i--) {  
             $nizkopijaObrnuto[] = $nizkopija[$i];
