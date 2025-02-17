@@ -12,14 +12,15 @@
     <div>
         <a href="#tab1">gfdgyx</a>
         <a href="#tab2">yghyxdgy</a>
-        <a href="#tab3">dgfgy</a>
+        <a href="#tab3">dgfgy</a> 
     </div>
     <ul id="conteiner">
         <li id="tab1">
+
             <h3>ivugvu</h3>
             <div>
-                <p>uohiughiuzokijpojb</p>
-                <p>uohiughiuzokijpojb</p>
+                <p>uohiughiuzokijpojb</p> dodavanje promjena
+                <p>uohiuojb</p> 
             </div>
         </li>
         <li id="tab2">
@@ -30,7 +31,6 @@
             </div>
         </li>
         <li id="tab3">
-            <h3>ivugvu</h3>
             <div>
                 <p>uohiughiuzokijpojb</p>
                 <p>uohiughiuzokijpojb</p>
@@ -46,7 +46,12 @@
             active: false
         })
         .sortable({
-            handle: h3
+            handle: h3,
+            axis: "y",
+            items: "li",
+            containment: "#conteiner",
+            opacity: 0.6,
+            
         })
         $('')
     </script>
