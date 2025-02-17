@@ -86,11 +86,33 @@
         //     $faktorjela *= $i;
         // }
         // echo "Faktorjela broja " .$broj. " je ".$faktorjela;
-
+        //aizgfdiuasgtidfuagsigw7eghjbydihlvfguseio
         // $broj = $_POST['broj']; 
         // $Prost = true;
-
+//asdkhbasihdvgaisbv dhavbzicvzwevfkasnbvfizlwegfbdrdiufgberhil
+//asfbuaiszogbvfliasvozfitrweg8zvfsbv
         // if ($broj % 2 == 0) {
+          // if ($broj % 2 == 0) {
+        //     echo $broj . " je paran. ";
+        // } else {
+        //     echo $broj . " je neparan. ";
+        // }  // if ($broj % 2 == 0) {
+        //     echo $broj . " je paran. ";
+        // } else {
+        //     echo $broj . " je neparan. ";
+        // }  // if ($broj % 2 == 0) {
+        //     echo $broj . " je paran. ";
+        // } else {
+        //     echo $broj . " je neparan. ";
+        // }  // if ($broj % 2 == 0) {
+        //     echo $broj . " je paran. ";
+        // } else {
+        //     echo $broj . " je neparan. ";
+        // }  // if ($broj % 2 == 0) {
+        //     echo $broj . " je paran. ";
+        // } else {
+        //     echo $broj . " je neparan. ";
+        // }
         //     echo $broj . " je paran. ";
         // } else {
         //     echo $broj . " je neparan. ";
