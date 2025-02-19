@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>whale language</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+</head>
+<body>
+    
+    <h1>gtkleghjihe</h1>
+    <h3>dfwefe</h3>
+    <h2>efei</h2>
+    <h2>erehi</h2>
+    <h3>ojoewj</h3>
+
+    <div id="roditelj" class="dobar dan">
+        <p>aaaa odlomak</p>
+        <h6 class="dan">Doooobar dannn</h6>
+        <div id='prvi'>
+            <p>ahsavhasvsav</p>
+        </div>
+        <p>dfghzujikol</p>
+        <div>
+            <p>AAAA</p>
+            <p>BBB</p>
+        </div>
+    </div>
+    <span>sdsa </span>
+    <p>dsfwfcewfcewfd</p>
+    <p>fdfsdsffsdsf</p>
+    
+    <div class="mark">sda</div>
+    <p class="mark">dsa</p>
+
+
+    <table>
+        <tr>
+            <td>SDDSD</td>
+            <td>AAASS</td>
+            <td>ERGDF</td>
+        </tr>
+        <tr>
+            <td>SADSA</td>
+            <td>ERGDF</td>
+            <td>ERGDF</td>
+        </tr>
+        <tr>
+            <td>SDDSD</td>
+            <td>AAASS</td>
+            <td>ERGDF</td>
+        </tr>
+        <tr>
+            <td>SADSA</td>
+            <td>ERGDF</td>
+            <td>ERGDF</td>
+        </tr>
+        <tr>
+            <td>SDDSD</td>
+            <td>AAASS</td>
+            <td>ERGDF</td>
+        </tr>
+        <tr>
+            <td>SADSA</td>
+            <td>ERGDF</td>
+            <td>ERGDF</td>
+        </tr>
+        <tr>
+            <td>SDDSD</td>
+            <td>AAASS</td>
+            <td>ERGDF</td>
+        </tr>
+        <tr>
+            <td>SADSA</td>
+            <td>ERGDF</td>
+            <td>ERGDF</td>
+        </tr>
+
+    </table>
+  <script>
+
+    $(function(){
+        // $('p').css('color','blue');
+
+        // $(".dobar .dan").css('background-color','green');//oznaci samo to unutar toga s razmakom
+        // // $(".dobar.dan").css('background-color','green'); //trazi sve
+
+        // //samo prvo kolino
+        // $('#roditelj > p').css('color','green');
+
+        // //samo drugo kolino
+        // $('#roditelj >> p').css('color','red');
+
+        // //svi p
+        // $('#roditelj p').css('color','blue');
+
+        //bas bas prvi mroa bit odma ispod roditelja
+        // $('#roditelj p:first-child').css('color','red');
+        // $('p:last-child').css('color','blue');
+
+        //TILDA nakon toga NE U
+        // $('#roditelj ~ p').css('color','red');
+
+        //NEPOSREDNO IZA #prvi
+        // $('#roditelj + p').css('color','magenta');
+        // $('#roditelj ++ p').css('color','red');
+
+        // + JE IZA TOGA
+        // $('#roditelj #prvi ~ p + div > p').css('color','blue');
+
+        //$('p.mark').css('color','yellow');
+
+
+        $("tr:lt(2)").css('background-color','pink');
+        $("tr:gt(4)").css('background-color','yellow');
+
+        $("tr:eq(5)").css('background-color','green');
+
+        $("table tr:eq(1)>td:eq(1)").css('background-color','lightblue');
+
+        $("h3:nth-child(2)").css('background-color','orange');
+        $("h3:nth-of-type(2)").css('background-color','red');
+
+
+
+    })
+
+    
+
+
+   
+  </script>
+</body>
+</html>
