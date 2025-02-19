@@ -17,8 +17,8 @@ function App() {
     <nav>
       <Link to="/"> Semafor </Link>
       <Link to="/popisIgraca"> Popis igraca </Link>
-      <Link to="/raspored/Dinamo"> Raspored Dinamo </Link>
-      <Link to="/raspored/Hajduk"> Raspored Hajduk </Link>
+      <Link to="/raspored/Rijeka"> Raspored Rijeka </Link>
+      <Link to="/raspored/Rijeka"> Raspored Rijeka </Link>
     </nav>
     <Routes>
       <Route path="/" element={<Semafor/>}></Route>
