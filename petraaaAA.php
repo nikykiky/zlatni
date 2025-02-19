@@ -25,8 +25,9 @@ $proizvodi = [
     ['naziv' => 'Laptop', 'cijena' => 4500],
     ['naziv' => 'Mobitel', 'cijena' => 1200],
     ['naziv' => 'Tablet', 'cijena' => 700],
-    ['naziv' => 'Monitor', 'cijena' => 900],
  ];
+
+ $var = "varijabla";
  $ukupna_cijena = 0;
  foreach ($proizvodi as $proizvod) {
     $ukupna_cijena += $proizvod['cijena'];
@@ -34,8 +35,8 @@ $proizvodi = [
  $pdv = 0.25 * $ukupna_cijena;
  $ukupna_cijena_s_pdv = $ukupna_cijena + $pdv;
 
- echo "Ukupna cijena bez PDV-a: " . round($ukupna_cijena, 2) . " HRK\n <br/>";
- echo "Ukupna cijena s PDV-om: " . round($ukupna_cijena_s_pdv, 2) . " HRK\n <br/>";
+ echo "Ukupna bez PDV-a: " . round($ukupna_cijena, 2) . " HRK\n <br/>";
+ echo "Ukupna s PDV-om: " . round($ukupna_cijena_s_pdv, 2) . " HRK\n <br/>";
  
  $ukupna_cijena = 0;
  foreach ($proizvodi as $proizvod) {
