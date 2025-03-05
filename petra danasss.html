@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <div id="myDiv" style="background-color: red;">
+        <p id="para">Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto, nulla.</p>
+
+    </div>
+
+    <div id="nemos" style="border: solid red 1px;">
+        <p>aaa nemos me kliknit</p>
+    </div>
+
+    <p>bbbbbbbb</p>
+    <p>bezveze</p>
+    
+   
+    <a href="#top">top</a>
+    <h2>Lorem, ipsum dolor.</h2>
+
+    <div id="abc" style="background-color: cornflowerblue; width: 200px; height: 200px;">
+    </div>
+    <button id="prvi">povecaj</button>
+    <button id="drugi">vrati</button>
+
+    <div id="pomicanje" style="background-color: rgb(121, 121, 167); width: 200px; height: 200px;">
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa, recusandae?</p>
+    </div>
+    <button id="livo">livo</button>
+    <button id="desno">desno</button>
+    <button>gore</button>
+    <script>
+    $(document).ready(function(){
+        $('#para').toggle(500);
+        $('#para').toggle(500);
+
+        $('#para').fadeOut(500);
+        $('#para').fadeIn(500);
+
+        $('#para').slideUp(500);
+        $('#para').slideDown(500);
+
+        $('#myDiv').animate({
+            height: '200px',
+            width: '200px'
+        },
+        5000);
+
+        $('#myDiv').fadeIn(6000, function () {
+            $('#myDiv').append('complited')
+            $('#myDiv').css('background-color', 'green')
+        });
+
+
+        $('#nemos').bind("contextmenu", function(){
+            return false;
+        });
+
+
+        $("a[href='#top']").click(function(){
+            $("html, body").animate({
+                scrollTop: 0
+            },"slow");
+        });
+        
+        $('#prvi').click(function(){
+            console.log("ssss")
+            $('#abc').animate({height:"300px"});
+        });
+        
+        $('#drugi').click(function(){
+            $('#abc').animate({height:"100px"});
+        });
+
+
+       $(document).keydown(function(e){
+        var position = 0;
+        if (e.keyCode == 37) {
+            position -= 10;
+            if (position < 10) {
+                position = 0; 
+            }
+        }
+        $('#pomicanje').css("margin-left", position + "px");
+       });
+
+    });
+
+
+
+
+    </script>
+</body>
+
+</html>
