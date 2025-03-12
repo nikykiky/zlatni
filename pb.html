@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zbrajanje brojeva</title>
+
+</head>
+<body>
+<h1>Zbrajanje brojeva</h1>
+<!-- <label for="broj1">
+    unesi prvi br
+    <input type="number" id="broj1">
+</label>
+
+<label for="broj2">
+    unesi drugi br
+    <input type="number" id="broj2">
+</label>
+<button onclick="zbroji()">Zbroji</button>
+<p id="rezultat"></p>
+
+-->
+<label for="godine"></label>
+    unesi godine
+    <input type="number" id="godine">
+</label> 
+<p id="dane"></p>
+<p id="brojevi"></p>
+<button onclick="provjeri()">provjeri</button>
+<script>
+    // function zbroji() {
+    //     var broj1 = parseInt(document.getElementById("broj1").value);
+    //     var broj2 = parseInt(document.getElementById("broj2").value);
+    //     var rezultat = broj1 + broj2;
+    //     document.getElementById("rezultat").innerHTML = "rezultat: " + rezultat;
+    // }
+function provjeri() {
+    var god = parseInt(document.getElementById("godine").value);
+    if (god >= 18) {
+        document.getElementById("dane").innerHTML = "punoljetan si";
+    } else {
+        document.getElementById("dane").innerHTML = "nisi punoljetan";
+    } 
+
+    var t = " ";
+
+    while (god != 0) {
+        t = t + god + " ";
+        god =god -1;
+
+    }
+    
+    document.getElementById("brojevi").innerHTML = t;
+    
+}
+    
+
+</script>
+</body>
+</html>
