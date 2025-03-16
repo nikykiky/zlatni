@@ -1,0 +1,24 @@
+Apache Cordova (JavaScript, HTML, CSS) 
+
+Da, moguće je napraviti takvu aplikaciju u **Apache Cordovi**! 📱  
+
+### **Kako bi to funkcionisalo?**  
+1. **Korisnik slika proizvod** 📸  
+   - Koristi se Cordova Camera Plugin za slikanje ili biranje slike iz galerije.  
+2. **Korisnik unosi podatke o proizvodu**  
+   - Forma u kojoj može uneti naziv, cenu, opis itd.  
+3. **Podaci se spremaju u bazu**  
+   - Može se koristiti **SQLite (lokalno)** ili **Firebase/MySQL (za cloud pristup)**.  
+4. **Pristup podacima**  
+   - Korisnik može pregledati, pretraživati i preuzimati sačuvane proizvode zajedno sa slikama.  
+
+### **Tehnologije koje ćeš koristiti**  
+✅ **Apache Cordova** – za razvoj mobilne aplikacije  
+✅ **Cordova Camera Plugin** – za fotografisanje i učitavanje slika  
+✅ **SQLite ili Firebase/MySQL** – za čuvanje podataka i slika  
+✅ **JavaScript + HTML + CSS** – za korisnički interfejs  
+
+### **Dodatne funkcionalnosti (opciono)**  
+🔹 **Cloud Storage** – ako želiš da slike budu dostupne online, možeš ih čuvati u Firebase Storage ili na nekom serveru.  
+🔹 **Autentifikacija** – ako želiš da korisnici imaju svoje naloge i pristup sopstvenim podacima.  
+
