@@ -1,2 +1,1 @@
 "# zlatni" 
-# Git

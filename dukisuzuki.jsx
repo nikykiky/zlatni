@@ -9,7 +9,7 @@ function App() {
   ]
 
   const predmet = [
-    {ime: "Nikolina", predmet:"jsaib"},
+    {ime: "Nikolina", predmet:"jsai"},
     {ime: "Topić", predmet:"eng"},
     {ime: "Šolić", predmet:"hrv"}
   ]

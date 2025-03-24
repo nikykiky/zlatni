@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        .container{
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        .header{
+            display: flex;
+            height: 50px;
+            background-color: gray;
+            justify-content: center;
+            align-items: center;
+            font-size:24px;
+            font-weight: bold;
+        }
+        .content{
+            display: flex;
+            flex-grow: 1;
+        }
+        .sidebar{
+            width: 200px;
+            background-color: gray;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .main{
+            flex-grow: 1;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+        .card{
+            width: 200px;
+            height: 300px;
+            background-color: gray;
+            margin: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .footer{
+            height: 50px;
+            background-color: gray;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">Header</div>
+        
+        
+    
+    <div class="content">
+        <div class="sidebar">Sidebar</div>
+        <div class="main">
+            <div class="card">Item 1</div>
+            <div class="card">Item 2</div>
+            <div class="card">Item 3</div>
+        </div>
+    </div>
+        <div class="footer">Footer</div>
+    </div>
+</body>
+</html>
