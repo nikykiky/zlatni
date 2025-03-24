@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+
+    <form id="myForm">
+        Ime: <input class="ime" id="ime">
+        <br><br>
+        Prezime: <input class="prezime" id="prezime">
+        <br><br>
+        Broj telefona: <input class="broj" id="broj">
+        <br><br>
+        Email: <input class="mail2" id="mail2" type="email">
+        <br><br>
+        Lozinka: <input class="lozinka" id="lozinka" type="password">
+        <img id="togglePassword" src="sakri.jpg" alt="Toggle Password" style="cursor: pointer; width: 20px; height: 20px;">
+        <br><br>
+        <input class="uvjeti" id="uvjeti" type="checkbox"> Prihvaćam uvjete korištenja
+        <br><br>
+        <button type="submit" id="botun" class="botun">Botun</button>
+        <br><br>
+    </form>
+
+    <div id="message"></div>
+    <script>
+
+
+
+    $(document).ready(function(){
+
+        $("#togglePassword").click(function() {
+        const passwordInput = $("#lozinka");
+        const inputType = passwordInput.attr("type");
+
+        if (inputType === "password") {
+            passwordInput.attr("type", "text");
+            $(this).attr("src", "pokazi.jpg");
+        } else {
+            passwordInput.attr("type", "password");
+            $(this).attr("src", "sakri.jpg"); 
+        }
+    });
+
+        $("#myForm").submit(function(event){
+            event.preventDefault(); 
+
+            $(".ime, .prezime, .broj, .mail2, .lozinka").css("border", "");
+            $("#message").empty();
+
+            var ime = $('#ime').val();
+            var prezime = $('#prezime').val();
+            var broj = $('#broj').val();
+            var mail = $('#mail2').val();
+
+            var lozinka = $('#lozinka').val();
+            var uvjeti = $('#uvjeti').is(':checked');
+
+            console.log(ime, prezime, broj, mail);
+            
+            let valid=true;
+            
+            if (ime === "") {
+                $("#message").append("Ime nije unešeno.<br>");
+                $("#ime").css("border","1px solid red");
+                valid = false;
+            } 
+            
+            if (prezime === "") {
+                $("#message").append("Prezime nije unešeno.<br>");
+                $("#prezime").css("border","1px solid red");
+                valid = false;
+            } 
+            
+            if (broj === "") {
+                $("#message").append("Broj nije unešen.<br>");
+                $("#broj").css("border","1px solid red");
+                valid = false;
+            } 
+             
+            if (mail === "") {
+                $("#message").append("Mail nije unešen.<br>");
+                $("#mail2").css("border","1px solid red")
+                valid = false;
+            } 
+
+            if (!/\d/.test(lozinka)) { //ovo /\d/ provjerava jel ima bar 1 broj
+                $("#message").append("Lozinka mora sadržavati barem jedan broj.<br>");
+                $("#lozinka").css("border", "1px solid red");
+                valid = false;
+            }
+
+
+            
+            if (!uvjeti) {
+                $("#message").append("Morate prihvatiti uvjete korištenja.<br>");
+                $("#uvjeti").css("border", "1px solid red");
+                valid = false;
+            }
+
+            if (valid) {
+                console.log(ime, prezime, broj, mail, lozinka);
+                $("#message").empty();
+                $("#message").append("Forma je uspješno poslana!<br>");
+                
+            }
+
+        });
+    });
+    </script>
+    
+</body>
+</html>
