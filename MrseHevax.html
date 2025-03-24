@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="jqueryUI.css">
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: aaaaaaa;
             margin: 20px;
         }
 
@@ -91,11 +91,12 @@
     </style>
 </head>
 a
+
 <body>
     <h1>Košarica za Kupovinu</h1>
-    <h1>Eggs and sauseges</h1>    
+    <h1>Eggs and sauseges</h1>
     <div class="container">
-        
+
         <div class="product-list">
             <h2>Proizvodi</h2>
             <ul class="sortable">
@@ -157,32 +158,32 @@ Sortiranje porizvoda po kolicini u kosarici
                 }
             });
 
-            function DodajProduktKojegNema(){
+            function DodajProduktKojegNema() {
                 const ProduktIspis = `
                 <div class="cart-item"> Kolicina - nema na zalihi 
                 <button class="remove">Ukloni</button>
                 </div>`
                 $(".cart-items").append(ProduktIspis)
             }
-            
 
-            $(".add-to-cart").on("click",function(){
+
+            $(".add-to-cart").on("click", function () {
                 $("#modalForm").dialog({
-                        buttons: {
-                            "Dodaj": function () {
-                                const quantity = $("#quantity").val();
-                                DodajProdukt(quantity);
-                                $(this).dialog("close");
-                            },
-                            "Odustani": function () {
-                                $(this).dialog("close");
-                            }
+                    buttons: {
+                        "Dodaj": function () {
+                            const quantity = $("#quantity").val();
+                            DodajProdukt(quantity);
+                            $(this).dialog("close");
+                        },
+                        "Odustani": function () {
+                            $(this).dialog("close");
                         }
+                    }
                 });
             })
 
 
-            function DodajProdukt(quantity){
+            function DodajProdukt(quantity) {
                 const ProduktIspis = `
                 <div class="cart-item"> Kolicina - ${quantity} 
                 <button class="remove">Ukloni</button>
@@ -190,8 +191,8 @@ Sortiranje porizvoda po kolicini u kosarici
                 $(".cart-items").append(ProduktIspis)
             }
 
-            $(".cart-item .remove").on("click", function() {
-            $(this).closest(".cart-item").remove();
+            $(".cart-item .remove").on("click", function () {
+                $(this).closest(".cart-item").remove();
             });
         });
     </script>
