@@ -6,8 +6,7 @@ print('''
 '''
 a = int(input("unesi a"))
 b = input("unesi a")
-o = 2 *a + 2*b
-print("opseg je:")
+hahahehehmimimi
 print(o)
 '''
 #2.
