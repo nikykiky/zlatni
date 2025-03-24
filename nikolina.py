@@ -3,6 +3,9 @@ print('''
         fkkfg
     werw
 ''')
+
+NA GRANI NIKOLINA
+
 '''
 a = int(input("unesi a"))
 b = input("unesi a")
