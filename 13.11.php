@@ -87,7 +87,12 @@
             
         }
   }
-
+ //     echo $broj . " je paran. ";
+        // } else {
+        //     echo $broj . " je neparan. ";
+        // }  // if ($broj % 2 == 0) {
+        //     echo $broj . " je paran. ";
+        // } else {
     for($i = 0; $i < 10; $i++){
         echo "<br><br>";
         echo $i +$i;
