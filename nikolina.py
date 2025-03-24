@@ -7,6 +7,9 @@ print('''
 a = int(input("unesi a"))
 b = input("unesi a")
 o = 2 *a + 2*b
+
+OVO JE GRANA MAIN 
+
 print("opseg je:")
 print(o)
 '''
