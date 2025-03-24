@@ -1,9 +1,4 @@
 dfsfdfd
-<<<<<<< HEAD
 asdasdas
 asdnaskdjasdh
 aklsdjasdaskldjaskld
-=======
-
-Conflict on this line
->>>>>>> bc542ec (ojj)
