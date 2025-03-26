@@ -41,7 +41,7 @@ echo $zbrojpdv;
 echo "<br/>";
 echo $zbrojbez;
 echo "ko je najjaci lik";
-
+/* ovo je moja gramcica lukas  */
 for ($i=0; $i < 5; $i++) { 
     $i--;
 }
