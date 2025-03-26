@@ -12,6 +12,7 @@ $proizvodi = [
 
 /** ovo je moja main grana */
 /* ovo je grana profa*/
+
 $zbrojpdv = 0;
 $zbrojbez = 0;
 foreach($proizvodi as $proizvod){
@@ -30,7 +31,8 @@ foreach($proizvodi as $proizvod){
         echo "<br>";
         echo strtoupper($nazivproizvoda);
     }
-    
+    /* stashat cemo*/
+    /** nova  */
 
 };
 echo "Ukupna cijena svih proizvoda sa PDV-om je : " . $zbrojpdv;
