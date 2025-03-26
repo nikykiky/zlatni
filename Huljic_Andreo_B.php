@@ -11,6 +11,7 @@ $proizvodi = [
 ];
 
 /** ovo je moja main grana */
+/* ovo je grana profa*/
 $zbrojpdv = 0;
 $zbrojbez = 0;
 foreach($proizvodi as $proizvod){
