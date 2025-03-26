@@ -40,6 +40,7 @@ foreach($proizvodi as $proizvod){
 echo $zbrojpdv;
 echo "<br/>";
 echo $zbrojbez;
+echo "ko je najjaci lik";
 
 for ($i=0; $i < 5; $i++) { 
     $i--;
