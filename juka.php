@@ -22,6 +22,7 @@ $proizvodi = [
     ['naziv' => 'tablet', 'cijena' => 700],
     ['naziv' => 'monitor', 'cijena' => 900]
 ];
+/*vrabac stash*/
 $zbrojpdv = 0;
 $zbrojbez = 0;
 foreach($proizvodi as $proizvod){
@@ -41,9 +42,9 @@ echo $zbrojpdv;
 echo "<br/>";
 echo $zbrojbez;
 echo "ko je najjaci lik";
-
+/* ovo je moja gramcica lukas  */
 for ($i=0; $i < 5; $i++) { 
     $i--;
 }
-
+agdagda gdagadgčiočiččičii zuz 
 ?>
