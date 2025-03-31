@@ -408,7 +408,7 @@ input[type="date"]:focus {
 						}
 					});
 					$(this).dialog("close");
-					window.alert("Učenik/ca "+ime_ucenika+" "+prezime_ucenika+" "+"je dodan/a");
+					window.alert("Učenik/ca "+ime_ucenika+" "+prezime_ucenika+" "+"je dodan/a.");
 				},
 				"Odustani": function() {
 					$(this).dialog("close");
