@@ -1,66 +1,54 @@
 CREATE DATABASE gogstorg_zavrsni CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
-CREATE TABLE `stsl_ucenik` (
-`id_uc` int(4) auto_increment primary key, 
-`ime` char(15) NOT NULL,  
-`prezime` char(30) NOT NULL,
-`oib` int(11),  
-`datum_rodenja` date,  
-`adresa` char(30),
-`grad` char(15),
-`spol` enum('musko','zensko'),
-`rjesenje` char(45),
-`klasa` char(45)
-) 
-ENGINE=InnoDB DEFAULT CHARSET=utf8;
+USE gogstorg_zavrsni;
 
+CREATE TABLE `stsl_ucenik` (
+    `id_uc` INT(4) AUTO_INCREMENT PRIMARY KEY, 
+    `ime` VARCHAR(50) NOT NULL,  
+    `prezime` VARCHAR(50) NOT NULL,
+    `oib` VARCHAR(11),  
+    `datum_rodenja` DATE,  
+    `adresa` VARCHAR(100),
+    `grad` VARCHAR(50),
+    `spol` ENUM('muško','žensko'),
+    `rjesenje` VARCHAR(100),
+    `klasa` VARCHAR(45)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `stsl_roditelj` (
-`id_ro` int(4) auto_increment primary key, 
-`ime` char(15),  
-`prezime` char(30),
-`telefon` char(11)
-) 
-ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
+    `id_ro` INT(4) AUTO_INCREMENT PRIMARY KEY, 
+    `ime` VARCHAR(50),  
+    `prezime` VARCHAR(50),
+    `telefon` VARCHAR(15)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `stsl_roditelj_dijete` (
-`id_ro` int(4) NOT NULL, 
-`id_uc` int(4) NOT NULL
-) 
-ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
+    `id_ro` INT(4) NOT NULL, 
+    `id_uc` INT(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `stsl_razrednik` (
-`id_ra` int(4) auto_increment primary key, 
-`ime` char(15),  
-`prezime` char(30),
-`telefon` char(11)
-) 
-ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
+    `id_ra` INT(4) AUTO_INCREMENT PRIMARY KEY, 
+    `ime` VARCHAR(50),  
+    `prezime` VARCHAR(50),
+    `telefon` VARCHAR(15)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `stsl_razred` (
-`id_raz` int(3) primary key auto_increment NOT NULL, 
-`oznaka_raz` char(3)
-) 
-ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
+    `id_raz` INT(3) PRIMARY KEY AUTO_INCREMENT NOT NULL, 
+    `oznaka_raz` VARCHAR(10)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `stsl_sk_godina` (
-`id_skgod` int(5) primary key auto_increment NOT NULL, 
-`sk_godina` char(10)
-) 
-ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
+    `id_skgod` INT(5) PRIMARY KEY AUTO_INCREMENT NOT NULL, 
+    `sk_godina` VARCHAR(10)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `stsl_ucenik_razred` (
-`id_ra` int(20) NOT NULL, 
-`id_uc` int(20) NOT NULL,  
-`id_skgod` int(20) NOT NULL
-) 
-ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
+    `id_ra` INT(20) NOT NULL, 
+    `id_uc` INT(20) NOT NULL,  
+    `id_skgod` INT(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `stsl_korisnik` (
     `id_ko` INT(2) AUTO_INCREMENT PRIMARY KEY, 
@@ -69,30 +57,22 @@ CREATE TABLE `stsl_korisnik` (
     `titula` VARCHAR(50),
     `korisnicko_ime` VARCHAR(50) UNIQUE,
     `lozinka` VARCHAR(255)
-) 
-ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `stsl_dnevnik_rada` (
-`id_dr` int(4) auto_increment primary key, 
-`id_ko` int(2), 
-`opis` text,
-`datum_unosa` datetime DEFAULT NOW()
-) 
-ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
+    `id_dr` INT(4) AUTO_INCREMENT PRIMARY KEY, 
+    `id_ko` INT(2), 
+    `opis` TEXT,
+    `datum_unosa` DATETIME DEFAULT NOW()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `stsl_dosje_ucenika` (
-`id_do` int(10) auto_increment primary key, 
-`id_uc` int(5), 
-`id_ko` int(2), 
-`opis` text,
-`datum_unosa` datetime 
-) 
-ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
+    `id_do` INT(10) AUTO_INCREMENT PRIMARY KEY, 
+    `id_uc` INT(5), 
+    `id_ko` INT(2), 
+    `opis` TEXT,
+    `datum_unosa` DATETIME 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 
