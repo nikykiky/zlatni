@@ -140,7 +140,7 @@ input[type="date"]:focus {
 			echo "
 			<div class='custom-select'>
 			<form action='".$_SERVER['PHP_SELF']."' method='POST' id='forma_select'>
-				<select name='razred'>
+				<select name='razred' onchange='this.form.submit()'>
 				<option value='--'>--</option>";
 				while($raz = mysqli_fetch_array($razredi))
 				{
@@ -171,7 +171,7 @@ input[type="date"]:focus {
 
 
 <?php
-	if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ispis_po_razredu'])) {
+	if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['razred'])) {
 		$rezultat = mysqli_query($conn,"
 		SELECT *
 		FROM stsl_ucenik_razred
