@@ -115,13 +115,7 @@ input[type="date"]:focus {
 	<div class="pola">
 		<h3>Pretraži učenika po razredu: </h3>
 		<?php
-			//include("../sigurnost/spoj_na_bazu.php");
-			/*
-			$servername = "localhost";
-			$username = "gogstorg_profesorica";
-			$password = "U9Tqu$;%i4a7";
-			$dbname = "gogstorg_zavrsni";
-			*/
+			// Konekcija sa bazom podataka
 			$servername = "localhost";
 			$username = "root";
 			$password = "";
@@ -136,24 +130,23 @@ input[type="date"]:focus {
 			$sk_godina = $sk_godina_data['sk_godina'];
 
 			$razredi_upit = "SELECT id_raz, oznaka_raz FROM stsl_razred";
-			$razredi = mysqli_query($conn,$razredi_upit);
+			$razredi = mysqli_query($conn, $razredi_upit);
+			
 			echo "
 			<div class='custom-select'>
 			<form action='".$_SERVER['PHP_SELF']."' method='POST' id='forma_select'>
-				<select name='razred'>
+				<select name='razred' id='razred' onchange='this.form.submit()'>
 				<option value='--'>--</option>";
 				while($raz = mysqli_fetch_array($razredi))
 				{
 					echo "<option value='".$raz['oznaka_raz']."'>".$raz['oznaka_raz']."</option>";
 				}
 				echo "</select>
-				<input type='submit' name='ispis_po_razredu' value='Pregledaj'/>
 			</form>
 			</div>";
-
-			//echo '<input type="submit" onclick="dodaj_ucu()" value="Dodaj učenika" />';
-		?>	
+		?>  
 	</div>
+
 
 	<div class="pola">
 		<h3>Pretraži učenika po imenu ili prezimenu: </h3>
