@@ -1,5 +1,0 @@
-br = 5;
-while(br > 10){
-	br++;
-	console.log(br);
-}
