@@ -7,6 +7,14 @@ print('''
 NA GRANI NIKOLINA
 
 '''
+dsfdsfdsfs
+dsfdsfdsfhjokiplćčškjghfdrzočlć
+retgćčlbtgluiočpćghk3
+gfdgdfčlggd
+dfgkjdfklgjgfhgčflk
+ghkjghj
+
+
 a = int(input("unesi a"))
 b = input("unesi a")
 <<<<<<< HEAD

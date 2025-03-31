@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.14.1/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.14.1/jquery-ui.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <a href="#tab1">ggyx</a>
+        <a href="#tab2">yghyxdgy</a>
+        <a href="#tab3">dgfy</a>
+    </div>
+    <ul id="conteiner">
+        <li id="tab1">
+            <h3>ivugvu</h3>
+            <div>
+                <p>uohiughiuzokijpojb</p>
+                <p>uohiughiuzokijpojb</p>
+            </div>
+        </li>
+        <li id="tab2">
+            <h3>ivugvu</h3>
+            <div>
+                <p>uohiughiuzokijpojb</p>
+                <p>uohiughiuzokijpojb</p>
+            </div>
+        </li>
+        <li id="tab3">
+            <h3>ivugvu</h3>
+            <div>
+                <p>uohiughiuzokijpojb</p>
+                <p>uohiughiuzokijpojb</p>
+            </div>
+        </li>
+        
+    </ul>
+    <script>
+        $('#conteiner').acordion().sortable();
+        $("#conteiner").acordion({
+            heightStyle: "content",
+            collapsible: true,
+            active: false
+        })
+        .sortable({
+            handle: h3
+        })
+        $('')
+    </script>
+</body>
+</html>
