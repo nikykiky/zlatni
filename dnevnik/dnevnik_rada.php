@@ -1,66 +1,93 @@
-<?php require_once("../sigurnost/sigurnosniKod.php"); 
-/*
-$servername = "localhost";
-$username = "gogstorg_profesorica";
-$password = "U9Tqu$;%i4a7";
-$dbname = "gogstorg_zavrsni";
-*/
+<?php
+session_start();
+require_once("../sigurnost/sigurnosniKod.php");
+
 $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "gogstorg_zavrsni";
 $conn = new mysqli($servername, $username, $password, $dbname);
 
+if ($conn->connect_error) {
+    die("Konekcija neuspješna: " . $conn->connect_error);
+}
+
 $danasnji_datum = date("Y-m-d");
 $korisnik = $_SESSION['user_id'];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['sbmt_dnevnik_rad'])) {
-	$opis = $_POST["opis_dnevnik_rada"];
-	$rezultat = "INSERT INTO stsl_dnevnik_rada (id_ko, opis) values('$korisnik','$opis')";
-	if (mysqli_query($conn, $rezultat)) {
-			header("Location: ".$_SERVER['PHP_SELF']);
-		exit();
-	} else {
-		echo "Error: " . $rezultat . "<br>" . mysqli_error($conn);
-	}
+    $opis = $conn->real_escape_string($_POST["opis_dnevnik_rada"]);
+    $datum_unosa = isset($_POST["datum_unosa"]) ? $_POST["datum_unosa"] : $danasnji_datum;
+    
+    $stmt = $conn->prepare("INSERT INTO stsl_dnevnik_rada (id_ko, opis, datum_unosa) VALUES (?, ?, ?)");
+    $stmt->bind_param("iss", $korisnik, $opis, $datum_unosa);
+    
+    if ($stmt->execute()) {
+        header("Location: " . $_SERVER['PHP_SELF']);
+        exit();
+    } else {
+        echo "Greška: " . $stmt->error;
+    }
+    $stmt->close();
 }
 ?>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dnevnik rada</title>
     <link href="../admin_css.css" rel="stylesheet" type="text/css" />
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/themes/smoothness/jquery-ui.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
-	<style>
-		@media print {
-            .unos_dnevnika, header, #printButton {
-                display: none;
-            }
-        }
-	</style>
 </head>
 <body>
 <div class="sve">
     <?php require_once("../izbornik.php"); ?>
-	
     <h2>Dnevnik rada</h2>
-	<button id="printButton">Printaj stranicu</button>
+    <button id="printButton">Printaj stranicu</button>
 
     <div class="unos_dnevnika">
         <form action="" method="POST">
-            <input type="text" name="id_korisnika" value="<?= $_SESSION['user_id'] ?>" style="display:none" />
-            Opis: <br />
-            <textarea rows="3" cols="5" name="opis_dnevnik_rada" ></textarea>
+            <input type="hidden" name="id_korisnika" value="<?= $_SESSION['user_id'] ?>" />
+            Datum unosa: <input type="date" name="datum_unosa" value="<?= $danasnji_datum ?>">
+            <br />Opis: <br />
+            <textarea rows="3" cols="50" name="opis_dnevnik_rada"></textarea>
             <br />
             <input type="submit" value="Dodaj dnevnik rada" name="sbmt_dnevnik_rad" />
         </form>
     </div>
+
+    <h3>Pregled dnevnika rada</h3>
+    <input type="text" id="datepicker" placeholder="Odaberi datum">
+    <table id="tablica_dnevnika_rada" border="1">
+        <thead>
+            <tr>
+                <td><b>Dnevnik rada</b></td>
+                <td><b>Datum unosa</b></td>
+            </tr>
+        </thead>
+        <tbody>
+        <?php
+        $query = "SELECT * FROM stsl_dnevnik_rada WHERE datum_unosa = '$danasnji_datum'";
+        $result = $conn->query($query);
+        while ($row = $result->fetch_assoc()) {
+            echo "<tr><td>" . htmlspecialchars($row['opis']) . "</td><td>" . $row['datum_unosa'] . "</td></tr>";
+        }
+        ?>
+        </tbody>
+    </table>
+</div>
+<script>
+    $("#printButton").click(function() {
+        window.print();
+    });
+    $("#datepicker").datepicker({
+        dateFormat: "yy-mm-dd",
+        onSelect: function(dateText) {
+            window.location.href = "dnevnik_rada.php?datum=" + dateText;
+        }
+    });
+</script>
 
     <?php
 	//include("../sigurnost/spoj_na_bazu.php");
