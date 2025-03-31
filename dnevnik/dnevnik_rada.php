@@ -176,6 +176,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['sbmt_dnevnik_rad'])) {
 
 
 <script>      
+	function izbrisi_unos_iz_dnevnika(obj) {
+    var id_delete_dnevnika_rada = obj.getAttribute('data-dr_id');
+
+    if (confirm("Jesi sigurna :/") == true) {
+        $.ajax({
+            type: "POST",
+            url: "sql_izbrisi_iz_dnevnika.php",
+            data: {"id_unosa_za_brisanje": id_delete_dnevnika_rada},
+            success: function (rez) {
+                if (rez === "You are not authorized to delete this entry.") {
+                    alert("You are not authorized to delete this entry.");
+                } else if (rez === "Success") {
+                    location.reload();  // Reload the page to reflect the deletion
+                } else {
+                    alert("An error occurred while deleting the entry.");
+                }
+            }
+        });
+    }
+}
+
+
 
 	$("#printButton").click(function() {
 		window.print();

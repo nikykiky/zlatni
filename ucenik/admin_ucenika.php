@@ -165,7 +165,7 @@ input[type="date"]:focus {
 
 	<div class="pola">
 		<h3>Dodaj učenika: </h3>
-		<input type="submit" name="sbmt_dodaj_ucenika" id="dodaj_ucu_btn" style="background-color: #ac72cf" value="Dodaj učenika" />
+		<input type="submit" name="sbmt_dodaj_ucenika" id="dodaj_ucu_btn" onclick="" style="background-color: #ac72cf" value="Dodaj učenika" />
 	</div>
 </div>
 
@@ -365,6 +365,7 @@ input[type="date"]:focus {
 		function dodaj_ucu() {
 			console.log("weegfb")
 			$('#dialog_dodaj').dialog('open');
+
 		}
 
 
@@ -407,11 +408,13 @@ input[type="date"]:focus {
 						}
 					});
 					$(this).dialog("close");
+					window.alert("Učenik/ca "+ime_ucenika+" "+prezime_ucenika+" "+"je dodan/a.");
 				},
 				"Odustani": function() {
 					$(this).dialog("close");
 				}
 			}
+
 		});
 	</script>
 </div>
