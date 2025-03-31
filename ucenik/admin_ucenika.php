@@ -147,7 +147,7 @@ input[type="date"]:focus {
 					echo "<option value='".$raz['oznaka_raz']."'>".$raz['oznaka_raz']."</option>";
 				}
 				echo "</select>
-				<input type='submit' name='ispis_po_razredu' value='Pregledaj'/>
+				
 			</form>
 			</div>";
 
