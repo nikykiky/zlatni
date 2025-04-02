@@ -112,40 +112,61 @@ input[type="date"]:focus {
 <?php require_once("../izbornik.php"); ?>
 
 <div class="redak">
-	<div class="pola">
-		<h3>Pretraži učenika po razredu: </h3>
-		<?php
-			// Konekcija sa bazom podataka
-			$servername = "localhost";
-			$username = "root";
-			$password = "";
-			$dbname = "gogstorg_zavrsni";
-			$conn = new mysqli($servername, $username, $password, $dbname);
-			
-			// Dohvat posljednje školske godine
-			$sk_godina_query = "SELECT id_skgod, sk_godina FROM stsl_sk_godina ORDER BY id_skgod DESC LIMIT 1";
-			$sk_godina_result = mysqli_query($conn, $sk_godina_query);
-			$sk_godina_data = mysqli_fetch_assoc($sk_godina_result);  // Dohvaćanje jednog reda podataka
-			$id_skgod = $sk_godina_data['id_skgod'];
-			$sk_godina = $sk_godina_data['sk_godina'];
+<div class="pola">
+    <h3>Pretraži učenika po razredu: </h3>
+    <?php
+        //include("../sigurnost/spoj_na_bazu.php");
+        /*
+        $servername = "localhost";
+        $username = "gogstorg_profesorica";
+        $password = "U9Tqu$;%i4a7";
+        $dbname = "gogstorg_zavrsni";
+        */
+        $servername = "localhost";
+        $username = "root";
+        $password = "";
+        $dbname = "gogstorg_zavrsni";
+        $conn = new mysqli($servername, $username, $password, $dbname);
 
-			$razredi_upit = "SELECT id_raz, oznaka_raz FROM stsl_razred";
-			$razredi = mysqli_query($conn, $razredi_upit);
-			
-			echo "
-			<div class='custom-select'>
-			<form action='".$_SERVER['PHP_SELF']."' method='POST' id='forma_select'>
-				<select name='razred' id='razred' onchange='this.form.submit()'>
-				<option value='--'>--</option>";
-				while($raz = mysqli_fetch_array($razredi))
-				{
-					echo "<option value='".$raz['oznaka_raz']."'>".$raz['oznaka_raz']."</option>";
-				}
-				echo "</select>
-			</form>
-			</div>";
-		?>  
-	</div>
+        // Dohvat posljednje školske godine
+        $sk_godina_query = "SELECT id_skgod, sk_godina FROM stsl_sk_godina ORDER BY id_skgod DESC LIMIT 1";
+        $sk_godina_result = mysqli_query($conn, $sk_godina_query);
+        $sk_godina_data = mysqli_fetch_assoc($sk_godina_result);  // Dohvaćanje jednog reda podataka
+        $id_skgod = $sk_godina_data['id_skgod'];
+        $sk_godina = $sk_godina_data['sk_godina'];
+
+        $razredi_upit = "SELECT id_raz, oznaka_raz FROM stsl_razred";
+        $razredi = mysqli_query($conn,$razredi_upit);
+        echo "
+        <div class='custom-select'>
+        <form action='".$_SERVER['PHP_SELF']."' method='POST' id='forma_select'>
+            <select name='razred' onchange='this.form.submit()'>
+            <option value='--'>--</option>";
+            while($raz = mysqli_fetch_array($razredi))
+            {
+                echo "<option value='".$raz['oznaka_raz']."'>".$raz['oznaka_raz']."</option>";
+            }
+            echo "</select>
+        </form>
+        </div>";
+
+        // Ispisivanje učenika prema razredu
+        if(isset($_POST['razred']) && $_POST['razred'] != '--') {
+            $razred = $_POST['razred'];
+            $upit_učenici = "SELECT * FROM stsl_učenici WHERE razred = '$razred' AND id_skgod = '$id_skgod'";
+            $rezultat_učenici = mysqli_query($conn, $upit_učenici);
+
+            if(mysqli_num_rows($rezultat_učenici) > 0) {
+                echo "<h4>Učenici u razredu $razred:</h4>";
+                while($učenik = mysqli_fetch_assoc($rezultat_učenici)) {
+                    echo "<p>".$učenik['ime']." ".$učenik['prezime']."</p>";
+                }
+            } else {
+                echo "<p>Nema učenika u odabranom razredu.</p>";
+            }
+        }
+    ?>
+</div>
 
 
 	<div class="pola">
