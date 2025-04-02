@@ -128,6 +128,7 @@ input[type="date"]:focus {
         $dbname = "gogstorg_zavrsni";
         $conn = new mysqli($servername, $username, $password, $dbname);
 
+<<<<<<< HEAD
         // Dohvat posljednje školske godine
         $sk_godina_query = "SELECT id_skgod, sk_godina FROM stsl_sk_godina ORDER BY id_skgod DESC LIMIT 1";
         $sk_godina_result = mysqli_query($conn, $sk_godina_query);
@@ -167,6 +168,23 @@ input[type="date"]:focus {
         }
     ?>
 </div>
+=======
+			$razredi_upit = "SELECT id_raz, oznaka_raz FROM stsl_razred";
+			$razredi = mysqli_query($conn,$razredi_upit);
+			echo "
+			<div class='custom-select'>
+			<form action='".$_SERVER['PHP_SELF']."' method='POST' id='forma_select'>
+				<select name='razred' onchange='this.form.submit()'>
+				<option value='--'>--</option>";
+				while($raz = mysqli_fetch_array($razredi))
+				{
+					echo "<option value='".$raz['oznaka_raz']."'>".$raz['oznaka_raz']."</option>";
+				}
+				echo "</select>
+				
+			</form>
+			</div>";
+>>>>>>> 1153b52738deb5a3d0872fb12f4d7d949ce073c3
 
 
 	<div class="pola">
@@ -185,7 +203,7 @@ input[type="date"]:focus {
 
 
 <?php
-	if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ispis_po_razredu'])) {
+	if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['razred'])) {
 		$rezultat = mysqli_query($conn,"
 		SELECT *
 		FROM stsl_ucenik_razred
@@ -385,51 +403,134 @@ input[type="date"]:focus {
 
 
 		$("#dialog_dodaj").dialog({
-			autoOpen: false,
-			height: "auto",
-			width: 450,
-			modal: true,
-			resizable: true,
-			buttons: {
-				"Unesi": function() {
-					//var unos = $('#dialog').find("textarea").val();
-					//var id_unosa_za_edit = $('#dialog').find("input").val();
-					ime_ucenika = $('input[name="ime_ucenika"]').val();
-					prezime_ucenika = $('input[name="prezime_ucenika"]').val(); 
-					oib_ucenika = $('input[name="oib_ucenika"]').val(); 
-					datum_rodenja = $('input[name="datum_rodenja"]').val(); 
-					adresa_ucenika = $('input[name="adresa_ucenika"]').val(); 
-					grad_ucenika = $('input[name="grad_ucenika"]').val(); 
-					spol_ucenika = $("input[name='spol_ucenika']:checked").val();
-					rjesenje_ucenika = $('input[name="rjesenje_ucenika"]').val(); 
-					klasa_ucenika = $('input[name="klasa_ucenika"]').val(); 
-					ime_oca = $('input[name="ime_oca"]').val();  
-					mob_oca = $('input[name="mob_oca"]').val(); 
-					ime_majke = $('input[name="ime_majke"]').val(); 
-					mob_majke = $('input[name="mob_majke"]').val(); 
-					id_razreda = $('select[name="id_razreda"]').val(); 
-					id_sk_god = $('input[name="id_sk_god"]').val(); 
-					
-					$.ajax({
-						type: "POST",
-						url: "dodaj_ucenika.php",
-						data: {"ime_ucenika" : ime_ucenika, "prezime_ucenika" : prezime_ucenika, "oib_ucenika":oib_ucenika,"datum_rodenja":datum_rodenja,"adresa_ucenika":adresa_ucenika,"grad_ucenika":grad_ucenika,"spol_ucenika":spol_ucenika,"rjesenje_ucenika":rjesenje_ucenika,"klasa_ucenika":klasa_ucenika,"ime_oca":ime_oca,"mob_oca":mob_oca,"ime_majke":ime_majke,"mob_majke":mob_majke,"id_razreda":id_razreda,"id_sk_god":id_sk_god},
-						success: function (rez) {
-							//location.reload(); 
-							//var redak = $("#tablica_dnevnika_rada tbody tr[data-id='" + id_unosa_za_edit + "']");
-							//redak.find("td").eq(0).text(unos); 
-							console.log("uneseno")
-						}
-					});
-					$(this).dialog("close");
-					window.alert("Učenik/ca "+ime_ucenika+" "+prezime_ucenika+" "+"je dodan/a.");
-				},
-				"Odustani": function() {
-					$(this).dialog("close");
-				}
-			}
+    autoOpen: false,
+    height: "auto",
+    width: 450,
+    modal: true,
+    resizable: true,
+    show: {
+        effect: "fade",
+        duration: 300
+    },
+    hide: {
+        effect: "fade",
+        duration: 300
+    },
+    buttons: {
+        "Unesi": function() {
+            ime_ucenika = $('input[name="ime_ucenika"]').val();
+            prezime_ucenika = $('input[name="prezime_ucenika"]').val(); 
+            oib_ucenika = $('input[name="oib_ucenika"]').val(); 
+            datum_rodenja = $('input[name="datum_rodenja"]').val(); 
+            adresa_ucenika = $('input[name="adresa_ucenika"]').val(); 
+            grad_ucenika = $('input[name="grad_ucenika"]').val(); 
+            spol_ucenika = $("input[name='spol_ucenika']:checked").val();
+            rjesenje_ucenika = $('input[name="rjesenje_ucenika"]').val(); 
+            klasa_ucenika = $('input[name="klasa_ucenika"]').val(); 
+            ime_oca = $('input[name="ime_oca"]').val();  
+            mob_oca = $('input[name="mob_oca"]').val(); 
+            ime_majke = $('input[name="ime_majke"]').val(); 
+            mob_majke = $('input[name="mob_majke"]').val(); 
+            id_razreda = $('select[name="id_razreda"]').val(); 
+            id_sk_god = $('input[name="id_sk_god"]').val(); 
+            
+            $.ajax({
+                type: "POST",
+                url: "dodaj_ucenika.php",
+                data: {"ime_ucenika" : ime_ucenika, "prezime_ucenika" : prezime_ucenika, "oib_ucenika":oib_ucenika,"datum_rodenja":datum_rodenja,"adresa_ucenika":adresa_ucenika,"grad_ucenika":grad_ucenika,"spol_ucenika":spol_ucenika,"rjesenje_ucenika":rjesenje_ucenika,"klasa_ucenika":klasa_ucenika,"ime_oca":ime_oca,"mob_oca":mob_oca,"ime_majke":ime_majke,"mob_majke":mob_majke,"id_razreda":id_razreda,"id_sk_god":id_sk_god},
+                success: function (rez) {
+                    console.log("uneseno");
+                    showNotification("Učenik/ca " + ime_ucenika + " " + prezime_ucenika + " je uspješno dodan/a!", true);
+                }
+            });
+            $(this).dialog("close");
+        },
+        "Odustani": function() {
+            $(this).dialog("close");
+        }
+    }
+});
 
-		});
+function showNotification(message, isSuccess) {
+
+    if ($("#notification").length === 0) {
+        $("body").append('<div id="notification"></div>');
+        
+     
+        $("<style>")
+            .text(`
+                #notification {
+                    position: fixed;
+                    top: 20px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background-color: #fff0f5;
+                    border: 2px solid #ff85a2;
+                    border-radius: 15px;
+                    padding: 15px 25px;
+                    box-shadow: 0 4px 20px rgba(255, 105, 180, 0.3);
+                    z-index: 10000;
+                    text-align: center;
+                    font-size: 16px;
+                    color: #db3a7a;
+                    max-width: 80%;
+                    opacity: 0;
+                    display: flex;
+                    align-items: center;
+                    font-weight: bold;
+                }
+                
+                #notification.success {
+                    background-color: #f0fff4;
+                    border-color: #68d391;
+                    color: #2f855a;
+                }
+                
+                #notification:before {
+                    content: "🎀";
+                    margin-right: 10px;
+                    font-size: 24px;
+                }
+                
+                #notification.success:before {
+                    content: "🎉";
+                }
+            `)
+            .appendTo("head");
+    }
+    
+  
+    const $notification = $("#notification")
+        .html(message)
+        .removeClass("success");
+    
+    if (isSuccess) {
+        $notification.addClass("success");
+    }
+    
+   
+    $notification.css({
+        "opacity": 0,
+        "top": "-100px"
+    }).show()
+    .animate({
+        "opacity": 1,
+        "top": "20px"
+    }, {
+        duration: 600,
+        easing: "easeOutBounce"
+    })
+    .delay(2000)
+    .animate({
+        "opacity": 0,
+        "top": "-100px"
+    }, {
+        duration: 400,
+        complete: function() {
+            $(this).hide();
+        }
+    });
+}
 	</script>
 </div>
 </body>
