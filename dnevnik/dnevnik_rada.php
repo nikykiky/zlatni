@@ -53,53 +53,78 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['sbmt_dnevnik_rad'])) {
 	<button id="printButton">Printaj stranicu</button>
 
     <div class="unos_dnevnika">
-        <form action="" method="POST">
-            <input type="text" name="id_korisnika" value="<?= $_SESSION['user_id'] ?>" style="display:none" />
-            Opis: <br />
-            <textarea rows="3" cols="5" name="opis_dnevnik_rada" ></textarea>
-            <br />
-            <input type="submit" value="Dodaj dnevnik rada" name="sbmt_dnevnik_rad" />
-        </form>
-    </div>
+		<form action="" method="POST">
+			<input type="text" name="id_korisnika" value="<?= $_SESSION['user_id'] ?>" style="display:none" />
+			Opis: <br />
+			<textarea rows="3" cols="5" name="opis_dnevnik_rada" ></textarea>
+			<br />
+			<input type="submit" value="Dodaj dnevnik rada" name="sbmt_dnevnik_rad" />
+		</form>
+	</div>
 
-    <?php
-	//include("../sigurnost/spoj_na_bazu.php");
-	
-    $pdtc_dnevnik_rada = mysqli_query($conn, "
-        SELECT * FROM stsl_dnevnik_rada
-        INNER JOIN stsl_korisnik ON stsl_korisnik.id_ko = stsl_dnevnik_rada.id_ko
-        WHERE datum_unosa LIKE '$danasnji_datum%'
-    ");
-	
-	echo "<h3 style='display: inline-block;'>Pregled dnevnika rada za datum: <span id='odabrani_datum'>".date("d-m")."</span></h3>";
+	<?php
+	// Provjerite da li je konekcija na bazu ispravna
+	include("../sigurnost/spoj_na_bazu.php");
+
+	// Ako je forma poslana, umetnite unos u dnevnik rada
+	if (isset($_POST['sbmt_dnevnik_rad'])) {
+		$id_korisnika = $_POST['id_korisnika'];
+		$opis_dnevnik_rada = $_POST['opis_dnevnik_rada'];
+		$datum_unosa = date("Y-m-d H:i:s"); // trenutni datum i vrijeme
+
+		// Pripremite SQL upit za umetanje
+		$upit = "INSERT INTO stsl_dnevnik_rada (id_ko, opis, datum_unosa) VALUES ('$id_korisnika', '$opis_dnevnik_rada', '$datum_unosa')";
+
+		// Izvršite upit
+		if (mysqli_query($conn, $upit)) {
+			echo "Dnevnik rada uspješno dodan!";
+		} else {
+			echo "Greška: " . mysqli_error($conn);
+		}
+	}
+
+	// Postavite varijablu za današnji datum
+	$danasnji_datum = date("Y-m-d");
+
+	// Upit za dohvat dnevnika rada za današnji datum
+	$pdtc_dnevnik_rada = mysqli_query($conn, "
+		SELECT * FROM stsl_dnevnik_rada
+		INNER JOIN stsl_korisnik ON stsl_korisnik.id_ko = stsl_dnevnik_rada.id_ko
+		WHERE datum_unosa LIKE '$danasnji_datum%'
+	");
+
+	echo "<h3 style='display: inline-block;'>Pregled dnevnika rada za datum: <span id='odabrani_datum'>" . date("d-m") . "</span></h3>";
 	echo "<input type='text' id='datepicker'>";
-    echo "<table id='tablica_dnevnika_rada' border='1'>
+	echo "<table id='tablica_dnevnika_rada' border='1'>
 			<thead>
 				<tr valign='top'>
-				<td width='50%'><b>Dnevnik rada</b></td>
-				<td width='20%'><b>Upisao</b></td>
-				<td width='15%'><b>Izmjeni</b></td>
-				<td width='15%'><b>Obrisi</b></td>
+					<td width='50%'><b>Dnevnik rada</b></td>
+					<td width='20%'><b>Upisao</b></td>
+					<td width='15%'><b>Izmjeni</b></td>
+					<td width='15%'><b>Obrisi</b></td>
 				</tr>
 			</thead>
 			<tbody>";
 
-    while ($redak = mysqli_fetch_array($pdtc_dnevnik_rada)) {
-        $id = $redak['id_dr'];
-        $dt = new DateTime($redak['datum_unosa']);
-        $vrijeme = $dt->format('H:i');
+while ($redak = mysqli_fetch_array($pdtc_dnevnik_rada)) {
+    $id = $redak['id_dr'];
+    $dt = new DateTime($redak['datum_unosa']);
+    $vrijeme = $dt->format('H:i');
 
-        echo "<tr valign='top' data-id='".$id."'><td>";
-        echo $redak['opis'];
-        echo "</td><td>";
-        echo $redak['ime'] . " " . $vrijeme;
-        echo "</td><td>";
-        echo "<a onclick='uredi_unos_iz_dnevnika(this)' style='text-decoration: underline; cursor: pointer' data-dr_opis='$redak[opis]' data-dr_id='$id'>Uredi</a>";
-        echo "</td><td>";
-        echo "<a onclick='izbrisi_unos_iz_dnevnika(this)' style='text-decoration: underline; cursor: pointer' data-dr_id='$id'>Izbrisi</a>";
-        echo "</td></tr>";
-    }
-	echo "</tbody></table>";
+    echo "<tr valign='top' data-id='" . $id . "'><td>";
+    echo $redak['opis'];
+    echo "</td><td>";
+    echo $redak['ime'] . " " . $vrijeme;
+    echo "</td><td>";
+    echo "<a onclick='uredi_unos_iz_dnevnika(this)' style='text-decoration: underline; cursor: pointer' data-dr_opis='$redak[opis]' data-dr_id='$id'>Uredi</a>";
+    echo "</td><td>";
+    echo "<a onclick='izbrisi_unos_iz_dnevnika(this)' style='text-decoration: underline; cursor: pointer' data-dr_id='$id'>Izbrisi</a>";
+    echo "</td></tr>";
+}
+
+echo "</tbody></table>";
+?>
+
 
 
 
