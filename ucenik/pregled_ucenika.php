@@ -1,7 +1,9 @@
-<?php require_once("../sigurnost/sigurnosniKod.php"); ?>
+<?php 
+require_once("../sigurnost/sigurnosniKod.php"); 
+?>
 <!DOCTYPE html>
 <head>
-<title>Pregled ucenika</title>
+<title>Pregled učenika</title>
 <meta http-equiv="Content-Type" content="text/html; charset=windows-1250" />
 <link rel="stylesheet" type="text/css" href="../admin_css.css" />
 </head>
@@ -20,6 +22,11 @@
 
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
+    }
+
+    // Provjerite je li id_ucenika prisutan u URL-u
+    if (!isset($_GET['id_ucenika'])) {
+        die("ID učenika nije postavljen!");
     }
 
     $id_ucenika = $_GET['id_ucenika'];
@@ -57,12 +64,21 @@
         echo "</td><td>";
         echo $redak['dan_upisa'];
         echo "</td><td>";
+
+        // Gumb za uređivanje bilješke
         echo "<form method='POST' style='display:inline;'>
                 <input type='hidden' name='edit_id' value='{$redak['id_do']}'>
                 <input type='hidden' name='edit_opis' value='{$redak['opis']}'>
                 <input type='hidden' name='edit_datum' value='{$redak['dan_upisa']}'>
                 <input type='submit' name='uredi_dosje' value='Uredi'>
               </form>";
+
+        // Gumb za brisanje bilješke
+        echo "<form method='POST' style='display:inline;'>
+                <input type='hidden' name='delete_id' value='{$redak['id_do']}'>
+                <input type='submit' name='obrisi_dosje' value='Obriši'>
+              </form>";
+
         echo "</td></tr>";
     }
     echo "</table>";
@@ -101,31 +117,24 @@
               </form>";
     }
 
-    // Dodavanje nove bilješke
-    if (isset($_POST['dodaj_dosje'])) {
-        $dosje_opis = mysqli_real_escape_string($conn, $_POST['dosje_opis']);
-        $datum_unosa_dosjea = mysqli_real_escape_string($conn, $_POST['datum_unosa_dosjea']);
-    
-        $query = "INSERT INTO stsl_dosje_ucenika (id_uc, id_ko, opis, datum_unosa) VALUES ('$id_ucenika', '$id_korisnika', '$dosje_opis', '$datum_unosa_dosjea')";
-    
-        if (mysqli_query($conn, $query)) {
-            echo "Uspješno uneseno!<br /><br />";
-            header("Location: " . $_SERVER['PHP_SELF'] . "?id_ucenika=" . $id_ucenika);
-            exit;
+    // Obrada brisanja bilješke
+    if (isset($_POST['obrisi_dosje'])) {
+        $delete_id = $_POST['delete_id'];
+
+        if (!empty($delete_id)) {
+            $query = "DELETE FROM stsl_dosje_ucenika WHERE id_do = '$delete_id'";
+            if (mysqli_query($conn, $query)) {
+                echo "Bilješka uspješno obrisana!<br /><br />";
+                header("Location: " . $_SERVER['PHP_SELF'] . "?id_ucenika=" . $id_ucenika);
+                exit;
+            } else {
+                echo "Greška pri brisanju bilješke: " . mysqli_error($conn) . "<br /><br />";
+            }
         } else {
-            echo "Nije uneseno!<br /><br />";
+            echo "Greška: ID bilješke nije valjan.<br /><br />";
         }
     }
-
 ?>
-
-<h4>Dodaj bilješku</h4>
-<form action="" method="POST">
-    Opis: 
-    <textarea rows="4" cols="50" name="dosje_opis"></textarea><br />
-    Datum unosa: <input type="date" name="datum_unosa_dosjea" value="<?php echo date('Y-m-d'); ?>" /><br />
-    <input type="submit" name="dodaj_dosje" value="Dodaj dosje"/>
-</form>
 
 </div>
 </body>
