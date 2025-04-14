@@ -128,7 +128,6 @@ input[type="date"]:focus {
         $dbname = "gogstorg_zavrsni";
         $conn = new mysqli($servername, $username, $password, $dbname);
 
-<<<<<<< HEAD
         // Dohvat posljednje školske godine
         $sk_godina_query = "SELECT id_skgod, sk_godina FROM stsl_sk_godina ORDER BY id_skgod DESC LIMIT 1";
         $sk_godina_result = mysqli_query($conn, $sk_godina_query);
@@ -168,23 +167,21 @@ input[type="date"]:focus {
         }
     ?>
 </div>
-=======
 			$razredi_upit = "SELECT id_raz, oznaka_raz FROM stsl_razred";
 			$razredi = mysqli_query($conn,$razredi_upit);
 			echo "
 			<div class='custom-select'>
-			<form action='".$_SERVER['PHP_SELF']."' method='POST' id='forma_select'>
+			<form action="'.$_SERVER['PHP_SELF'].'" method='POST' id='forma_select'>
 				<select name='razred' onchange='this.form.submit()'>
 				<option value='--'>--</option>";
 				while($raz = mysqli_fetch_array($razredi))
 				{
-					echo "<option value='".$raz['oznaka_raz']."'>".$raz['oznaka_raz']."</option>";
+					echo "<option value="'.$raz['oznaka_raz'].'">".$raz['oznaka_raz']."</option>";
 				}
 				echo "</select>
 				
 			</form>
 			</div>";
->>>>>>> 1153b52738deb5a3d0872fb12f4d7d949ce073c3
 
 
 	<div class="pola">
