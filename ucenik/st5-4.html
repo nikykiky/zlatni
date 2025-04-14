@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Legends Arena - Character Collection RPG</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@3.9.4/dist/full.css" rel="stylesheet" type="text/css" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant:wght@400;700&display=swap');
+    
+    body {
+      font-family: 'Courier New', monospace;
+      color: #e0d2b4;
+      background-image: url('https://images.unsplash.com/photo-1605106702734-205df224ecce?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    
+    .overlay {
+      background: radial-gradient(ellipse at center, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.8) 100%);
+    }
+    
+    .game-title {
+      position: relative;
+      display: inline-block;
+      font-family: 'Times New Roman', serif;
+      color: #ffd700;
+      text-shadow: 3px 3px 6px #000, 0 0 20px rgba(255, 215, 0, 0.7);
+      letter-spacing: 6px;
+    }
+    
+    .game-title::before,
+    .game-title::after {
+      content: "";
+      position: absolute;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, #ffd700, #8b5a2b, #ffd700, transparent);
+      width: 120%;
+      left: -10%;
+      box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    }
+    
+    .game-title::before {
+      top: -20px;
+    }
+    
+    .game-title::after {
+      bottom: -20px;
+    }
+    
+    .game-subtitle {
+      color: #e0d2b4;
+      text-shadow: 2px 2px 3px #000, 0 0 10px rgba(255, 215, 0, 0.3);
+    }
+    
+    .menu-option {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(to right, rgba(40, 23, 15, 0.8), rgba(60, 35, 20, 0.8));
+      border: 2px solid #8b5a2b;
+      color: #e0d2b4;
+      text-shadow: 1px 1px 2px #000;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    }
+    
+    .menu-option:hover {
+      background: linear-gradient(to right, rgba(80, 46, 30, 0.9), rgba(100, 60, 35, 0.9));
+      color: #ffd700;
+      border-color: #ffd700;
+      box-shadow: 0 0 15px 3px rgba(255, 215, 0, 0.4);
+      text-shadow: 0 0 8px rgba(255, 215, 0, 0.7);
+    }
+    
+    .menu-option::before,
+    .menu-option::after {
+      content: "⚔";
+      position: absolute;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    
+    .menu-option::before {
+      left: 15px;
+    }
+    
+    .menu-option::after {
+      right: 15px;
+    }
+    
+    .menu-option:hover::before,
+    .menu-option:hover::after {
+      opacity: 1;
+    }
+    
+    .nav-item {
+      color: #e0d2b4;
+      text-shadow: 1px 1px 2px #000;
+      transition: all 0.3s;
+    }
+    
+    .nav-item:hover {
+      color: #ffd700;
+      border: 1px solid #8b5a2b;
+      background-color: rgba(50, 30, 20, 0.5);
+      text-shadow: 0 0 8px rgba(255, 215, 0, 0.7);
+    }
+    
+    .ornamental-frame {
+      border: 12px solid #8b5a2b;
+      background: rgba(10, 5, 2, 0.4);
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+    }
+    
+    .central-emblem {
+      background: radial-gradient(circle, rgba(255,215,0,0.1) 0%, rgba(139,90,43,0.1) 100%);
+      filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5));
+    }
+
+    .character-card {
+      height: 320px;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .character-image {
+      height: 180px;
+      object-fit: cover;
+      width: 100%;
+    }
+    
+    @media (max-width: 768px) {
+      .game-title {
+        font-size: 48px;
+      }
+      
+      .game-subtitle {
+        font-size: 20px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .game-title {
+        font-size: 36px;
+        letter-spacing: 3px;
+      }
+    }
+  </style>
+</head>
+<body class="min-h-screen overflow-hidden">
+  <div class="overlay fixed inset-0 z-10"></div>
+  
+  <div class="relative z-20 flex flex-col min-h-screen">
+    <!-- Navbar -->
+    <nav class="flex justify-between items-center px-5 py-4 border-b-2 border-[#8b5a2b] bg-[#140c08] bg-opacity-80 shadow-lg shadow-[#8b5a2b]/30">
+      <div class="logo text-2xl font-bold text-[#ffd700] font-serif tracking-wider" style="text-shadow: 2px 2px 4px #000, 0 0 10px rgba(255, 215, 0, 0.5);">Legends Arena</div>
+      <div class="flex gap-5">
+        <div class="nav-item px-4 py-2 cursor-pointer" id="characters-btn">Characters</div>
+        <div class="nav-item px-4 py-2 cursor-pointer" id="inventory-btn">Inventory</div>
+        <div class="nav-item px-4 py-2 cursor-pointer" id="profile-btn">Profile</div>
+      </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <main class="flex-grow flex flex-col items-center justify-center relative p-5">
+      <!-- Ornamental Frame -->
+      <div class="ornamental-frame absolute w-[90%] h-[77%] rounded-lg -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 z-0"></div>
+      
+      <!-- Central Emblem -->
+      <div class="central-emblem absolute w-48 h-48 rounded-full opacity-30 z-10 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"></div>
+      
+      <!-- Game Title -->
+      <div class="text-center mb-8 relative z-30">
+        <h1 class="game-title text-6xl md:text-7xl font-bold mb-5">LEGENDS ARENA</h1>
+        <div class="game-subtitle text-2xl md:text-3xl italic tracking-wider">Collect. Battle. Conquer.</div>
+      </div>
+      
+      <!-- Menu Container -->
+      <div class="relative z-30 bg-gradient-to-b from-[#1e120c]/90 to-[#140a05]/90 border-4 border-[#8b5a2b] rounded-lg p-8 md:p-10 w-full max-w-[470px] shadow-2xl" style="box-shadow: 0 0 30px rgba(0, 0, 0, 0.8), inset 0 0 20px rgba(139, 90, 43, 0.3);">
+        <div class="flex flex-col gap-5">
+          <div class="menu-option rounded-lg py-4 px-8 text-center text-xl cursor-pointer transition-all duration-300 hover:scale-105" id="battle-btn">Battle</div>
+          <div class="menu-option rounded-lg py-4 px-8 text-center text-xl cursor-pointer transition-all duration-300 hover:scale-105" id="story-btn">Story Mode</div>
+          <div class="menu-option rounded-lg py-4 px-8 text-center text-xl cursor-pointer transition-all duration-300 hover:scale-105" id="arena-btn">Arena</div>
+          <div class="menu-option rounded-lg py-4 px-8 text-center text-xl cursor-pointer transition-all duration-300 hover:scale-105" id="settings-btn">Settings</div>
+        </div>
+      </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="py-3 text-center border-t-2 border-[#8b5a2b] bg-[#140c08]/90 shadow-lg text-sm" style="text-shadow: 1px 1px 2px #000;">
+      © 2025 Legends Arena
+    </footer>
+  </div>
+
+  <!-- Character Popup Modal -->
+  <div id="character-modal" class="hidden fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4">
+    <div class="modal-box bg-gradient-to-b from-[#1e120c] to-[#140a05] border-4 border-[#8b5a2b] rounded-lg w-[90%] max-w-5xl mx-4 relative" 
+         style="box-shadow: 0 0 30px rgba(0, 0, 0, 0.8), inset 0 0 20px rgba(139, 90, 43, 0.3);">
+      <button id="close-modal" class="btn btn-sm btn-circle absolute right-2 top-2 text-[#ffd700] border-[#8b5a2b] hover:bg-[#8b5a2b]/50">
+        ✕
+      </button>
+      <div class="space-y-4">
+        <h3 class="text-2xl font-bold text-[#ffd700] text-center mb-4">Character Collection</h3>
+        <div class="flex gap-2">
+          <div class="form-control flex-1 relative">
+            <input type="text" 
+                   placeholder="Search by name..." 
+                   class="input input-bordered w-full bg-[#140c08] border-[#8b5a2b] text-[#e0d2b4] placeholder-[#8b5a2b]"
+                   id="search-input"
+                   style="box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);">
+            <button onclick="toggleFilters()" class="btn btn-sm absolute right-2 top-2 bg-[#8b5a2b] border-[#8b5a2b] hover:bg-[#ffd700] hover:text-[#8b5a2b]">
+              Filter ▼
+            </button>
+          </div>
+        </div>
+        
+        <!-- Filter Dropdown -->
+        <div id="filter-dropdown" class="hidden bg-[#140c08] p-4 rounded-lg border border-[#8b5a2b]">
+          <div class="grid grid-cols-1 gap-4">
+            <div>
+              <label class="block text-sm mb-1">Class</label>
+              <select class="select select-bordered w-full bg-[#140c08] border-[#8b5a2b] text-[#e0d2b4]" 
+                      onchange="updateFilter('class', this.value)">
+                <option value="">All Classes</option>
+                <option>Barbarian</option>
+                <option>Bard</option>
+                <option>Cleric</option>
+                <option>Druid</option>
+                <option>Fighter</option>
+                <option>Monk</option>
+                <option>Paladin</option>
+                <option>Ranger</option>
+                <option>Rogue</option>
+                <option>Sorcerer</option>
+                <option>Warlock</option>
+                <option>Wizard</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 h-[70vh] overflow-y-auto p-2" id="character-grid">
+          <div id="loading-spinner" class="col-span-full flex justify-center items-center py-10">
+            <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#8b5a2b]"></div>
+          </div>
+          <div id="error-message" class="col-span-full text-center text-red-400 hidden">
+            Failed to load characters. Please try again later.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Detail Modal -->
+  <div id="detail-modal" class="hidden fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4">
+    <div class="modal-box bg-gradient-to-b from-[#1e120c] to-[#140a05] border-4 border-[#8b5a2b] rounded-lg max-w-md relative" 
+         style="box-shadow: 0 0 30px rgba(0, 0, 0, 0.8), inset 0 0 20px rgba(139, 90, 43, 0.3);">
+      <button class="btn btn-sm btn-circle absolute right-2 top-2 text-[#ffd700] border-[#8b5a2b] hover:bg-[#8b5a2b]/50 close-detail">
+        ✕
+      </button>
+      <div class="space-y-4 text-[#e0d2b4]">
+        <img id="detail-image" src="" alt="" class="w-full h-48 object-cover rounded-lg mb-4">
+        <h2 id="detail-name" class="text-2xl font-bold text-[#ffd700]"></h2>
+        <div class="grid grid-cols-1 gap-4">
+          <div><span class="font-bold">Class:</span> <span id="detail-class"></span></div>
+        </div>
+        <p id="detail-desc" class="text-sm"></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Global variables
+    const characters = [
+      { id: 1, name: "Grommash Ironhide", class: "Barbarian", description: "A fierce warrior from the northern wastes, Grommash wields his massive axe with terrifying precision.", image: "https://source.unsplash.com/random/200x300?barbarian&sig=1" },
+      { id: 2, name: "Lorath Stormrage", class: "Bard", description: "With voice and lute, Lorath weaves magic that can charm the most hardened hearts.", image: "https://source.unsplash.com/random/200x300?bard&sig=2" },
+      { id: 3, name: "Andor Brightblade", class: "Cleric", description: "Devoted to the light, Andor heals the wounded and smites the wicked with equal fervor.", image: "https://source.unsplash.com/random/200x300?cleric&sig=3" },
+      { id: 4, name: "Elowen Moonwhisper", class: "Druid", description: "Guardian of the ancient forests, Elowen commands the forces of nature itself.", image: "https://source.unsplash.com/random/200x300?druid&sig=4" },
+      { id: 5, name: "Ragnar Stoneheart", class: "Fighter", description: "A veteran of countless battles, Ragnar's sword has ended more wars than most have seen.", image: "https://source.unsplash.com/random/200x300?fighter&sig=5" },
+      { id: 6, name: "Li Dragonkin", class: "Monk", description: "Master of the celestial arts, Li's fists strike faster than the eye can follow.", image: "https://source.unsplash.com/random/200x300?monk&sig=6" },
+      { id: 7, name: "Godfrey Fireforge", class: "Paladin", description: "His holy hammer delivers justice in the name of his divine patron.", image: "https://source.unsplash.com/random/200x300?paladin&sig=7" },
+      { id: 8, name: "Aragorn Shadowleaf", class: "Ranger", description: "No arrow strays from its mark when Aragorn draws his bow.", image: "https://source.unsplash.com/random/200x300?ranger&sig=8" },
+      { id: 9, name: "Varys Darkwater", class: "Rogue", description: "The shadows themselves seem to bend to Varys' will as he moves unseen.", image: "https://source.unsplash.com/random/200x300?rogue&sig=9" },
+      { id: 10, name: "Merlin Frostbeard", class: "Wizard", description: "Ancient knowledge flows through Merlin, making him one of the most powerful arcane practitioners.", image: "https://source.unsplash.com/random/200x300?wizard&sig=10" },
+      { id: 11, name: "Malakar Shadowleaf", class: "Warlock", description: "Bound to an eldritch patron, Malakar wields forbidden powers that twist reality itself.", image: "https://source.unsplash.com/random/200x300?warlock&sig=11" },
+      { id: 12, name: "Alaric Fireforge", class: "Sorcerer", description: "Born with magic in his blood, Alaric's raw power is matched only by his fiery temper.", image: "https://source.unsplash.com/random/200x300?sorcerer&sig=12" },
+      { id: 13, name: "Thokk Ironhide", class: "Barbarian", description: "Thokk's battle cries can shatter shields before his axe ever meets them.", image: "https://source.unsplash.com/random/200x300?barbarian&sig=13" },
+      { id: 14, name: "Eldrin Moonwhisper", class: "Bard", description: "Eldrin's ballads have the power to raise armies or topple kingdoms with their truths.", image: "https://source.unsplash.com/random/200x300?bard&sig=14" },
+      { id: 15, name: "Tyrion Brightblade", class: "Cleric", description: "Tyrion's faith is his shield, and his mace delivers divine retribution.", image: "https://source.unsplash.com/random/200x300?cleric&sig=15" },
+      { id: 16, name: "Fenrir Stormrage", class: "Druid", description: "When Fenrir shapeshifts, even the mightiest beasts bow before his primal might.", image: "https://source.unsplash.com/random/200x300?druid&sig=16" },
+      { id: 17, name: "Siegfried Stoneheart", class: "Fighter", description: "Siegfried's mastery of arms makes him a one-man army on the battlefield.", image: "https://source.unsplash.com/random/200x300?fighter&sig=17" },
+      { id: 18, name: "Chen Dragonkin", class: "Monk", description: "Chen's ki flows like water, striking with the force of a tidal wave.", image: "https://source.unsplash.com/random/200x300?monk&sig=18" },
+      { id: 19, name: "Tirion Fireforge", class: "Paladin", description: "Tirion's oath binds him to protect the innocent and punish evildoers without mercy.", image: "https://source.unsplash.com/random/200x300?paladin&sig=19" },
+      { id: 20, name: "Legolas Shadowleaf", class: "Ranger", description: "Legolas moves through the wilderness like a ghost, striking from impossible distances.", image: "https://source.unsplash.com/random/200x300?ranger&sig=20" }
+    ];
+
+    let currentFilters = {
+      search: '',
+      class: ''
+    };
+
+    // Initialize characters with filters
+    function initializeCharacters() {
+      const searchTerm = currentFilters.search.toLowerCase();
+      const filteredChars = characters.filter(char => 
+        char.name.toLowerCase().includes(searchTerm) &&
+        (currentFilters.class ? char.class === currentFilters.class : true)
+      );
+
+      const characterGrid = document.getElementById('character-grid');
+      characterGrid.innerHTML = '';
+      
+      filteredChars.forEach(char => {
+        const card = document.createElement('div');
+        card.className = 'bg-[#140c08] rounded-lg p-4 cursor-pointer hover:scale-105 transition-all border-2 border-[#8b5a2b] character-card';
+        card.innerHTML = `
+          <img src="${char.image}" alt="${char.name}" class="character-image mb-2 rounded">
+          <h3 class="font-bold text-[#ffd700] text-lg mb-1">${char.name}</h3>
+          <p class="text-sm mb-1">${char.class}</p>
+        `;
+        card.addEventListener('click', () => showDetail(char));
+        characterGrid.appendChild(card);
+      });
+      
+      // Hide loading spinner since we're using static data
+      document.getElementById('loading-spinner').classList.add('hidden');
+    }
+
+    // Show/hide filter dropdown
+    function toggleFilters() {
+      document.getElementById('filter-dropdown').classList.toggle('hidden');
+    }
+
+    // Update filters and refresh list
+    function updateFilter(type, value) {
+      currentFilters[type] = value;
+      initializeCharacters();
+    }
+
+    // Show character details
+    function showDetail(char) {
+      document.getElementById('detail-modal').classList.remove('hidden');
+      document.getElementById('detail-name').textContent = char.name;
+      document.getElementById('detail-class').textContent = char.class;
+      document.getElementById('detail-desc').textContent = char.description;
+      document.getElementById('detail-image').src = char.image;
+    }
+
+    // Debounce function for search
+    function debounce(func, timeout = 300) {
+      let timer;
+      return (...args) => {
+        clearTimeout(timer);
+        timer = setTimeout(() => { func.apply(this, args); }, timeout);
+      };
+    }
+
+    // Event listeners
+    document.getElementById('characters-btn').addEventListener('click', () => {
+      document.getElementById('character-modal').classList.remove('hidden');
+      initializeCharacters();
+    });
+
+    document.getElementById('close-modal').addEventListener('click', () => {
+      document.getElementById('character-modal').classList.add('hidden');
+    });
+
+    document.querySelector('.close-detail').addEventListener('click', () => {
+      document.getElementById('detail-modal').classList.add('hidden');
+    });
+
+    // Improved search with debounce
+    const searchInput = document.getElementById('search-input');
+    const processSearch = debounce(() => {
+      updateFilter('search', searchInput.value.toLowerCase());
+    });
+    searchInput.addEventListener('input', processSearch);
+
+    // Initialize characters when modal opens
+    document.getElementById('character-modal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        this.classList.add('hidden');
+      }
+    });
+  </script>
+</body>
+</html>
