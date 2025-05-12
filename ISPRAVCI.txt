@@ -16,7 +16,7 @@ stsl2024
 ! u bazi slovo š i ć - rijeseno Marko Debak
 ! da mi odabir razreda radi na onchange
 ! edit uređivanje bilješki od učenika
-! na dodaj učenika - id skolske godiine neka pise koja je godina
+! na dodaj učenika - id skolske godiine neka pise koja je godina	
 ! ime oca i majke nadodati na tablicu od ucenika 
 ! dodaj obavijest da je dodan ucenika
 
