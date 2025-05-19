@@ -141,4 +141,4 @@ INSERT INTO `stsl_razrednik` (`ime`, `prezime`, `telefon`) VALUES
 ('Martina', 'Javorčić', '0981472511'),
 ('Jelena', 'Gluić', '0917418520');
 
-//diego
+//fras
